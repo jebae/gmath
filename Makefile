@@ -7,6 +7,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = srcs/mat4/*.c\
 	srcs/vec4/*.c\
 	srcs/quaternion/*.c\
+	srcs/camera/*.c\
 
 INCLUDES = -I ./includes\
 
@@ -16,8 +17,10 @@ OBJS = identity_mat.o\
 	translate_mat.o\
 	vec4_operator.o\
 	zero_vec.o\
+	normalize.o\
 	quaternion_operator.o\
 	q_rotate.o\
+	camera_rotate.o\
 
 all : $(NAME)
 

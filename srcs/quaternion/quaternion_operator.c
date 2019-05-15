@@ -13,3 +13,14 @@ t_quaternion		q_mul_q(t_quaternion *q1, t_quaternion *q2)
 		  q1->x * q2->y - q1->y * q2->x;
 	return (q);
 }
+
+t_quaternion		inverse_q(t_quaternion *q)
+{
+	t_quaternion	q_i;
+
+	q_i.w = q->w;
+	q_i.x = -1 * q->x;
+	q_i.y = -1 * q->y;
+	q_i.z = -1 * q->z;
+	return (q_i);
+}

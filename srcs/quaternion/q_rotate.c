@@ -1,43 +1,27 @@
 #include "gmath.h"
 
-t_quaternion	get_q(float roll, float pitch, float yaw)
+t_quaternion	rotate_q(t_vec4 *n, float theta)
 {
 	t_quaternion		q;
-	t_rotation_helper	rh;
+	float				s;
 
-	rh.cr = cos(roll * 0.5);
-	rh.cp = cos(pitch * 0.5);
-	rh.cy = cos(yaw * 0.5);
-	rh.sr = sin(roll * 0.5);
-	rh.sp = sin(pitch * 0.5);
-	rh.sy = sin(yaw * 0.5);
-	q.w = rh.cr * rh.cp * rh.cy + rh.sr * rh.sp * rh.sy;
-	q.x = rh.sr * rh.cp * rh.cy - rh.cr * rh.sp * rh.sy;
-	q.y = rh.cr * rh.sp * rh.cy + rh.sr * rh.cp * rh.sy;
-	q.z = rh.cr * rh.cp * rh.sy - rh.sr * rh.sp * rh.cy;
+	s = sin(theta * 0.5);
+	q.x = s * n->arr[0];
+	q.y = s * n->arr[1];
+	q.z = s * n->arr[2];
+	q.w = cos(theta * 0.5);
 	return (q);
 }
 
-t_quaternion	get_q_inverse(t_quaternion *q)
-{
-	t_quaternion	q_i;
 
-	q_i.w = q->w;
-	q_i.x = -1 * q->x;
-	q_i.y = -1 * q->y;
-	q_i.z = -1 * q->z;
-	return (q_i);
-}
-
-t_vec4			q_rotate(t_quaternion *q,\
-		t_vec4 *v, t_quaternion *q_i)
+t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i)
 {
 	t_quaternion	res;
 
-	v->q.w = 0;
+	v->arr[3] = 0;
 	res = q_mul_q(q, (t_quaternion *)v);
 	res = q_mul_q(&res, q_i);
-	v->q.w = 1;
+	v->arr[3] = 1;
 	res.w = 1;
 	return (*((t_vec4 *)&res));
 }

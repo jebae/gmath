@@ -23,11 +23,7 @@ typedef struct					s_rotation_helper
 
 typedef struct					s_vec4
 {
-	union
-	{
-		float					arr[4];
-		struct s_quaternion		q;
-	};
+	float						arr[4];
 }								t_vec4;
 
 typedef struct					s_mat4
@@ -51,13 +47,20 @@ float			vec_dot_vec(t_vec4 *v1, t_vec4 *v2);
 
 t_vec4			scalar_mul_vec(float scalar, t_vec4 *v);
 
+t_vec4			vec_plus_vec(t_vec4 *v1, t_vec4 *v2);
+
+t_vec4			vec_cross_vec(t_vec4 *v1, t_vec4 *v2);
+
+t_vec4			vec_norm(t_vec4 *v);
+
 t_quaternion	q_mul_q(t_quaternion *q1, t_quaternion *q2);
 
-t_quaternion	get_q(float roll, float pitch, float yaw);
+t_quaternion	rotate_q(t_vec4 *n, float theta);
 
-t_quaternion	get_q_inverse(t_quaternion *q);
+t_quaternion	inverse_q(t_quaternion *q);
 
-t_vec4			q_rotate(t_quaternion *q,\
-		t_vec4 *v, t_quaternion *q_i);
+t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i);
+
+t_vec4			normalize(t_vec4 *v);
 
 #endif
