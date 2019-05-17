@@ -1,5 +1,3 @@
-.SILENT :
-
 NAME = libgmath.a
 
 CC = gcc
@@ -10,6 +8,7 @@ SRCS = srcs/mat4/*.c\
 	srcs/vec4/*.c\
 	srcs/quaternion/*.c\
 	srcs/camera/*.c\
+	srcs/projection/*.c\
 
 INCLUDES = -I ./includes\
 	-I ../libft/includes\
@@ -23,7 +22,8 @@ OBJS = identity_mat.o\
 	normalize.o\
 	quaternion_operator.o\
 	q_rotate.o\
-	camera_rotate.o\
+	camera_mat.o\
+	parallel_projection.o\
 
 LIBS = ../libft/libft.a
 

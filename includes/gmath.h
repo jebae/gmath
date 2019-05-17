@@ -13,16 +13,6 @@ typedef struct					s_quaternion
 	float						w;
 }								t_quaternion;
 
-typedef struct					s_rotation_helper
-{
-	float						cr;
-	float						sr;
-	float						cp;
-	float						sp;
-	float						cy;
-	float						sy;
-}								t_rotation_helper;
-
 typedef struct					s_vec4
 {
 	float						arr[4];
@@ -32,6 +22,20 @@ typedef struct					s_mat4
 {
 	float						arr[4][4];
 }								t_mat4;
+
+typedef struct          		s_coord
+{
+    int                 		x;
+    int                 		y;
+}                       		t_coord;
+
+typedef struct					s_camera
+{
+	t_vec4						pos;
+	t_vec4						focus;
+	float						zoom;
+	float						roll;
+}								t_camera;
 
 t_mat4			identity_mat();
 
@@ -65,6 +69,8 @@ t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i);
 
 t_vec4			normalize(t_vec4 *v);
 
-t_mat4			camera_coord_mat(t_vec4 *camera, t_vec4 *focus, float roll);
+t_mat4			camera_mat(t_camera *cam);
+
+t_coord			parallel_projection(t_vec4 *vertex);
 
 #endif
