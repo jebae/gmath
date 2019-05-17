@@ -2,6 +2,8 @@
 # define GRAPHIC_MATH_H
 
 # include <math.h>
+# include "libft.h"
+#include <stdio.h>
 
 typedef struct					s_quaternion
 {
@@ -51,7 +53,7 @@ t_vec4			vec_plus_vec(t_vec4 *v1, t_vec4 *v2);
 
 t_vec4			vec_cross_vec(t_vec4 *v1, t_vec4 *v2);
 
-t_vec4			vec_norm(t_vec4 *v);
+float			vec_norm(t_vec4 *v);
 
 t_quaternion	q_mul_q(t_quaternion *q1, t_quaternion *q2);
 
@@ -62,5 +64,7 @@ t_quaternion	inverse_q(t_quaternion *q);
 t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i);
 
 t_vec4			normalize(t_vec4 *v);
+
+t_mat4			camera_coord_mat(t_vec4 *camera, t_vec4 *focus, float roll);
 
 #endif

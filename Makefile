@@ -1,3 +1,5 @@
+.SILENT :
+
 NAME = libgmath.a
 
 CC = gcc
@@ -10,6 +12,7 @@ SRCS = srcs/mat4/*.c\
 	srcs/camera/*.c\
 
 INCLUDES = -I ./includes\
+	-I ../libft/includes\
 
 OBJS = identity_mat.o\
 	mat4_operator.o\
@@ -22,19 +25,26 @@ OBJS = identity_mat.o\
 	q_rotate.o\
 	camera_rotate.o\
 
+LIBS = ../libft/libft.a
+
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(LIBS) $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
+
+$(LIBS) :
+	$(MAKE) -C ../libft all
 
 $(OBJS) :
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
 
 clean :
+	$(MAKE) -C ../libft clean
 	rm -rf $(OBJS)
 
 fclean : clean
+	$(MAKE) -C ../libft fclean
 	rm -rf $(NAME)
 
 re : fclean all
