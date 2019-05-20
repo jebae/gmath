@@ -24,6 +24,7 @@ OBJS = identity_mat.o\
 	q_rotate.o\
 	camera_mat.o\
 	parallel_projection.o\
+	perspective_projection.o\
 
 LIBS = ../libft/libft.a
 
