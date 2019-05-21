@@ -11,3 +11,11 @@ t_vec4		perspective_projection(t_vec4 *vertex)
 	proj.arr[3] = 1;
 	return (proj);
 }
+
+float       cal_perspective_proj_z(int x, int y, t_polygon_coefficient *co)
+{
+    float   z;
+
+    z = -1 * (co->d / (co->a * (float)x + co->b * (float)y + co->c));
+    return (z);
+}

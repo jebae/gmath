@@ -9,6 +9,7 @@ SRCS = srcs/mat4/*.c\
 	srcs/quaternion/*.c\
 	srcs/camera/*.c\
 	srcs/projection/*.c\
+	srcs/polygon/*.c\
 
 INCLUDES = -I ./includes\
 	-I ../libft/includes\
@@ -25,6 +26,7 @@ OBJS = identity_mat.o\
 	camera_mat.o\
 	parallel_projection.o\
 	perspective_projection.o\
+	polygon_coefficient.o\
 
 LIBS = ../libft/libft.a
 

@@ -29,6 +29,20 @@ typedef struct          		s_coord
     int                 		y;
 }                       		t_coord;
 
+typedef struct          		s_polygon
+{
+    size_t              		v_count;
+    struct s_vec4       		*vertices;
+}                       		t_polygon;
+
+typedef struct          		s_polygon_coefficient
+{
+    float               		a;
+    float               		b;
+    float               		c;
+    float               		d;
+}                       		t_polygon_coefficient;
+
 typedef struct					s_camera
 {
 	t_vec4						pos;
@@ -66,6 +80,11 @@ t_quaternion	inverse_q(t_quaternion *q);
 t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i);
 
 /*
+ * polygon
+*/
+t_polygon_coefficient   polygon_coefficient(t_polygon *polygon);
+
+/*
  * camera
 */
 t_mat4			camera_mat(t_camera *cam);
@@ -74,6 +93,8 @@ t_mat4			camera_mat(t_camera *cam);
  * projection
 */
 t_vec4			parallel_projection(t_vec4 *vertex);
+float       	cal_parallel_proj_z(int x, int y, t_polygon_coefficient *co);
 t_vec4			perspective_projection(t_vec4 *vertex);
+float       	cal_perspective_proj_z(int x, int y, t_polygon_coefficient *co);
 
 #endif
