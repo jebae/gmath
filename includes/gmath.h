@@ -33,6 +33,8 @@ typedef struct          		s_polygon
 {
     size_t              		v_count;
     struct s_vec4       		*vertices;
+	int							line_color;
+	int							fill_color;
 }                       		t_polygon;
 
 typedef struct          		s_polygon_coefficient
