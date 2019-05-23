@@ -4,6 +4,7 @@
 # include <math.h>
 # include "libft.h"
 #include <stdio.h>
+# define DEGREE_1 (M_PI / 180.0)
 
 typedef struct					s_quaternion
 {
@@ -88,6 +89,8 @@ t_polygon_coefficient   polygon_coefficient(t_polygon *polygon);
  * camera
 */
 t_mat4			camera_mat(t_camera *cam);
+void			rotate_camera(t_camera *cam, t_vec4 *axis, t_vec4 *axis_foot,\
+	float theta);
 
 /*
  * projection

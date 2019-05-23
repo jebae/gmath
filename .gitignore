@@ -6,3 +6,4 @@ dumbmain.c
 *.sh
 *.o
 *.a
+.vscode

@@ -24,6 +24,7 @@ OBJS = identity_mat.o\
 	quaternion_operator.o\
 	q_rotate.o\
 	camera_mat.o\
+	rotate_camera.o\
 	parallel_projection.o\
 	perspective_projection.o\
 	polygon_coefficient.o\
@@ -39,8 +40,8 @@ $(NAME) : $(LIBS) $(OBJS)
 $(LIBS) :
 	$(MAKE) -C ../libft all
 
-$(OBJS) :
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
+$(OBJS) : $(SRCS)
+	$(CC) -D DEBUG $(CFLAGS) $(INCLUDES) -c $(SRCS)
 
 clean :
 	$(MAKE) -C ../libft clean

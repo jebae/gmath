@@ -13,7 +13,6 @@ t_quaternion	rotate_q(t_vec4 *n, float theta)
 	return (q);
 }
 
-
 t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i)
 {
 	t_quaternion	res;
