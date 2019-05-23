@@ -28,6 +28,7 @@ OBJS = identity_mat.o\
 	parallel_projection.o\
 	perspective_projection.o\
 	polygon_coefficient.o\
+	new_polygon.o\
 
 LIBS = ../libft/libft.a
 

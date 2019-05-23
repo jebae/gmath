@@ -85,6 +85,7 @@ t_vec4			rotate(t_quaternion *q, t_vec4 *v, t_quaternion *q_i);
 /*
  * polygon
 */
+t_polygon				new_polygon(size_t v_count, int line_color, int fill_color);
 t_polygon_coefficient   polygon_coefficient(t_polygon *polygon);
 
 /*
