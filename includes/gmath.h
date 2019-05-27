@@ -3,7 +3,6 @@
 
 # include <math.h>
 # include "libft.h"
-#include <stdio.h>
 # define DEGREE_1 (M_PI / 180.0)
 
 typedef struct					s_quaternion
