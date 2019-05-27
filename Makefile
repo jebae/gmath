@@ -42,7 +42,7 @@ $(LIBS) :
 	$(MAKE) -C ../libft all
 
 $(OBJS) : $(SRCS)
-	$(CC) -D DEBUG $(CFLAGS) $(INCLUDES) -c $(SRCS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
 
 clean :
 	$(MAKE) -C ../libft clean
