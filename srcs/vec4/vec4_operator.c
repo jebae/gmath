@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vec4_operator.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 15:25:31 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 15:25:32 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "gmath.h"
 
 float		vec_dot_vec(t_vec4 *v1, t_vec4 *v2)
@@ -58,5 +70,5 @@ t_vec4		vec_cross_vec(t_vec4 *v1, t_vec4 *v2)
 
 float		vec_norm(t_vec4 *v)
 {
-	return(sqrt(pow(v->arr[0], 2) + pow(v->arr[1], 2) + pow(v->arr[2], 2)));
+	return (sqrt(pow(v->arr[0], 2) + pow(v->arr[1], 2) + pow(v->arr[2], 2)));
 }

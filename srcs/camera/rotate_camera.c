@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate_camera.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 15:24:51 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 15:24:52 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "gmath.h"
 
-void	rotate_camera(t_camera *cam, t_vec4 *axis, t_vec4 *axis_foot, float theta)
+void	rotate_camera(t_camera *cam, t_vec4 *axis,\
+	t_vec4 *axis_foot, float theta)
 {
 	t_vec4			po;
 	t_vec4			pc;
