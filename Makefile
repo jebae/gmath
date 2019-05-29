@@ -10,6 +10,7 @@ SRCS = srcs/mat4/*.c\
 	srcs/camera/*.c\
 	srcs/projection/*.c\
 	srcs/polygon/*.c\
+	srcs/complex/*.c\
 
 INCLUDES = -I ./includes\
 	-I ../libft/includes\
@@ -29,6 +30,7 @@ OBJS = identity_mat.o\
 	perspective_projection.o\
 	polygon_coefficient.o\
 	new_polygon.o\
+	complex_operator.o\
 
 LIBS = ../libft/libft.a
 

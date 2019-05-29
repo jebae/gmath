@@ -19,50 +19,56 @@
 
 typedef struct			s_quaternion
 {
-	float						x;
-	float						y;
-	float						z;
-	float						w;
+	float				x;
+	float				y;
+	float				z;
+	float				w;
 }						t_quaternion;
 
 typedef struct			s_vec4
 {
-	float						arr[4];
+	float				arr[4];
 }						t_vec4;
 
 typedef struct			s_mat4
 {
-	float						arr[4][4];
+	float				arr[4][4];
 }						t_mat4;
 
 typedef struct			s_coord
 {
-	int							x;
-	int							y;
+	int					x;
+	int					y;
 }						t_coord;
+
+typedef struct			s_complex
+{
+	float				r;
+	float				i;
+}						t_complex;
 
 typedef struct			s_polygon
 {
-	size_t						v_count;
-	struct s_vec4				*vertices;
-	int							line_color;
-	int							fill_color;
+	size_t				v_count;
+	struct s_vec4		*vertices;
+	int					line_color;
+	int					fill_color;
 }						t_polygon;
 
 typedef struct			s_polygon_coefficient
 {
-	float						a;
-	float						b;
-	float						c;
-	float						d;
+	float				a;
+	float				b;
+	float				c;
+	float				d;
 }						t_polygon_coefficient;
 
 typedef struct			s_camera
 {
-	t_vec4						pos;
-	t_vec4						focus;
-	float						zoom;
-	float						roll;
+	t_vec4				pos;
+	t_vec4				focus;
+	float				zoom;
+	float				roll;
 }						t_camera;
 
 /*
@@ -84,6 +90,13 @@ t_vec4					vec_plus_vec(t_vec4 *v1, t_vec4 *v2);
 t_vec4					vec_cross_vec(t_vec4 *v1, t_vec4 *v2);
 float					vec_norm(t_vec4 *v);
 t_vec4					normalize(t_vec4 *v);
+
+/*
+** complex
+*/
+t_complex				cmplx_plus_cmplx(t_complex *c1, t_complex *c2);
+t_complex				conjugate(t_complex *c);
+t_complex				cmplx_mul_cmplx(t_complex *c1, t_complex *c2);
 
 /*
 ** quaternion
