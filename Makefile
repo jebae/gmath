@@ -31,6 +31,7 @@ OBJS = identity_mat.o\
 	polygon_coefficient.o\
 	new_polygon.o\
 	complex_operator.o\
+	complex_coord.o\
 
 LIBS = ../libft/libft.a
 

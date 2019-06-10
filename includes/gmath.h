@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:24:42 by jebae             #+#    #+#             */
-/*   Updated: 2019/05/28 15:32:47 by jebae            ###   ########.fr       */
+/*   Updated: 2019/06/10 19:04:04 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ typedef struct			s_camera
 	float				roll;
 }						t_camera;
 
+typedef struct			s_complex_coord_zoom_args
+{
+	float				width;
+	float				height;
+	float				zoom;
+	t_complex			*entry_point;
+	t_complex			*focus;
+}						t_complex_coord_zoom_args;
+
 /*
 ** matrix
 */
@@ -97,6 +106,7 @@ t_vec4					normalize(t_vec4 *v);
 t_complex				cmplx_plus_cmplx(t_complex *c1, t_complex *c2);
 t_complex				conjugate(t_complex *c);
 t_complex				cmplx_mul_cmplx(t_complex *c1, t_complex *c2);
+t_complex				complex_coord_zoom(t_complex_coord_zoom_args *args);
 
 /*
 ** quaternion
