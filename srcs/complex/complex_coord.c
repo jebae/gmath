@@ -3,7 +3,7 @@
 t_complex		complex_coord_zoom(t_complex_coord_zoom_args *args)
 {
 	t_complex		entry_point;
-	float			scale;
+	double			scale;
 
 	scale = 1 / (args->zoom);
 	entry_point.r = args->entry_point->r * scale;

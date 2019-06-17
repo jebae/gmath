@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:24:42 by jebae             #+#    #+#             */
-/*   Updated: 2019/06/10 19:04:04 by jebae            ###   ########.fr       */
+/*   Updated: 2019/06/17 13:50:57 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct			s_coord
 
 typedef struct			s_complex
 {
-	float				r;
-	float				i;
+	double				r;
+	double				i;
 }						t_complex;
 
 typedef struct			s_polygon
@@ -73,9 +73,9 @@ typedef struct			s_camera
 
 typedef struct			s_complex_coord_zoom_args
 {
-	float				width;
-	float				height;
-	float				zoom;
+	double				width;
+	double				height;
+	double				zoom;
 	t_complex			*entry_point;
 	t_complex			*focus;
 }						t_complex_coord_zoom_args;
