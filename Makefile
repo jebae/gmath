@@ -1,58 +1,89 @@
+.PHONY : all clean fclean re
+
 NAME = libgmath.a
 
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = srcs/mat4/*.c\
-	srcs/vec4/*.c\
-	srcs/quaternion/*.c\
-	srcs/camera/*.c\
-	srcs/projection/*.c\
-	srcs/polygon/*.c\
-	srcs/complex/*.c\
+SRCDIR = srcs
+
+OBJDIR = objs
+
+INCDIR = includes
+
+LIBFT_PATH = ../libft
 
 INCLUDES = -I ./includes\
-	-I ../libft/includes\
+	-I $(LIBFT_PATH)/includes\
 
-OBJS = identity_mat.o\
-	mat4_operator.o\
-	scale_mat.o\
-	translate_mat.o\
-	vec4_operator.o\
-	zero_vec.o\
-	normalize.o\
-	quaternion_operator.o\
+LIBS = $(LIBFT_PATH)/libft.a
+
+SRC_CAMERA = camera_mat.c\
+	rotate_camera.c\
+
+SRC_COMPLEX = complex_operator.c\
+	complex_coord.c\
+
+SRC_MAT = identity_mat.c\
+	mat4_operator.c\
+	scale_mat.c\
+	translate_mat.c\
+
+SRC_VEC = vec4_operator.c\
+	zero_vec.c\
+	normalize.c\
+
+SRC_QUATERNION = quaternion_operator.o\
 	q_rotate.o\
-	camera_mat.o\
-	rotate_camera.o\
-	parallel_projection.o\
-	perspective_projection.o\
-	polygon_coefficient.o\
-	new_polygon.o\
-	complex_operator.o\
-	complex_coord.o\
 
-LIBS = ../libft/libft.a
+SRC_PROJECTION = parallel_projection.o\
+	perspective_projection.o\
+
+SRC_POLYGON = polygon_coefficient.o\
+	new_polygon.o\
+
+OBJS = $(addprefix $(OBJDIR)/, $(SRC_CAMERA:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_COMPLEX:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_MAT:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_VEC:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_QUATERNION:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_PROJECTION:.c=.o))
+OBJS += $(addprefix $(OBJDIR)/, $(SRC_POLYGON:.c=.o))
 
 all : $(NAME)
 
-$(NAME) : $(LIBS) $(OBJS)
+$(NAME) : $(LIBS) $(OBJDIR) $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 $(LIBS) :
-	$(MAKE) -C ../libft all
+	$(MAKE) -C $(LIBFT_PATH) all
 
-$(OBJS) : $(SRCS)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
+$(OBJDIR) :
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o : $(SRCDIR)/camera/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/complex/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/mat4/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/vec4/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/quaternion/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/projection/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o : $(SRCDIR)/polygon/%.c $(INCDIR)/gmath.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean :
-	$(MAKE) -C ../libft clean
+	$(MAKE) -C $(LIBFT_PATH) clean
 	rm -rf $(OBJS)
 
 fclean : clean
-	$(MAKE) -C ../libft fclean
+	$(MAKE) -C $(LIBFT_PATH) fclean
 	rm -rf $(NAME)
 
 re : fclean all
