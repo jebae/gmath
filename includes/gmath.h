@@ -43,8 +43,8 @@ typedef struct			s_coord
 
 typedef struct			s_complex
 {
-	float				r;
-	float				i;
+	double				r;
+	double				i;
 }						t_complex;
 
 typedef struct			s_polygon
@@ -73,9 +73,9 @@ typedef struct			s_camera
 
 typedef struct			s_complex_coord_zoom_args
 {
-	float				width;
-	float				height;
-	float				zoom;
+	double				width;
+	double				height;
+	double				zoom;
 	t_complex			*entry_point;
 	t_complex			*focus;
 }						t_complex_coord_zoom_args;
