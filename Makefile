@@ -1,13 +1,23 @@
-RED=\e[1;31m%s\e[0m
-GRN=\e[1;32m%s\e[0m
-YEL=\e[1;33m%s\e[0m
+# utils
+KRED=\033[0;31m
+KGRN=\033[0;32m
+KYEL=\033[0;33m
+KNRM=\033[0m
+COUNTER = 0
 
-NAME = libgmath.a
+define compile_obj
+	printf "$(KGRN)[gmath]$(KNRM) compile $(1)\n"
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
+	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
+endef
 
+# compiler
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+# lib name
+NAME = libgmath.a
 
+# path
 SRCDIR = srcs
 
 OBJDIR = objs
@@ -16,11 +26,13 @@ INCDIR = includes
 
 LIBFT_PATH = ../libft
 
-INCLUDES = -I ./includes\
+# compiler options
+CFLAGS = -Wall -Wextra -Werror
+
+INCLUDES = -I ./$(INCDIR)\
 	-I $(LIBFT_PATH)/includes\
 
-LIBS = $(LIBFT_PATH)/libft.a
-
+# srcs
 SRC_CAMERA = camera_mat.c\
 	rotate_camera.c\
 
@@ -45,6 +57,7 @@ SRC_PROJECTION = parallel_projection.o\
 SRC_POLYGON = polygon_coefficient.o\
 	new_polygon.o\
 
+# objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_CAMERA:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_COMPLEX:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_MAT:.c=.o))
@@ -53,49 +66,49 @@ OBJS += $(addprefix $(OBJDIR)/, $(SRC_QUATERNION:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_PROJECTION:.c=.o))
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_POLYGON:.c=.o))
 
-$(OBJDIR)/%.o : $(SRCDIR)/camera/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/complex/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/mat4/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/vec4/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/quaternion/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/projection/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(OBJDIR)/%.o : $(SRCDIR)/polygon/%.c $(INCDIR)/gmath.h
-	@printf "$(YEL)\n" "-> compile $<"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+# compile objs
+HEADERS = $(INCDIR)/gmath.h\
+	$(LIBFT_PATH)/includes/libft.h\
+	$(LIBFT_PATH)/includes/get_next_line.h\
 
+$(OBJDIR)/%.o : $(SRCDIR)/camera/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/complex/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/mat4/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/vec4/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/quaternion/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/projection/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+$(OBJDIR)/%.o : $(SRCDIR)/polygon/%.c $(HEADERS)
+	@$(call compile_obj,$<,$@)
+
+# build
 all : $(NAME)
 
-$(NAME) : $(LIBS) $(OBJDIR) $(OBJS)
+$(NAME) : pre_build $(OBJDIR) $(OBJS) post_build
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
-$(LIBS) :
-	@printf "$(GRN)\n" "-> compile libft"
-	$(MAKE) -C $(LIBFT_PATH) all
+pre_build :
+	@printf "$(KGRN)[gmath] $(KYEL)build $(NAME)\n$(KNRM)"
+
+post_build :
+	@printf "$(KGRN)[gmath] $(KYEL)$(COUNTER) files compiled\n$(KNRM)"
 
 $(OBJDIR) :
 	@mkdir -p $(OBJDIR)
 
+# commands
 clean :
-	$(MAKE) -C $(LIBFT_PATH) clean
 	@rm -rf $(OBJS)
 
 fclean : clean
-	$(MAKE) -C $(LIBFT_PATH) fclean
 	@rm -rf $(NAME)
 
 re : fclean all
 
-.PHONY : all clean fclean re $(LIBS)
+.PHONY : all pre_build post_build clean fclean re
