@@ -33,7 +33,8 @@ INCLUDES = -I ./$(INCDIR)\
 	-I $(LIBFT_PATH)/includes\
 
 # srcs
-SRC_CAMERA = camera_mat.c\
+SRC_CAMERA = camera_axis.c\
+	camera_mat.c\
 	rotate_camera.c\
 
 SRC_COMPLEX = complex_operator.c\
@@ -45,6 +46,7 @@ SRC_MAT = identity_mat.c\
 	translate_mat.c\
 
 SRC_VEC = vec4_operator.c\
+	vec4_operator2.c\
 	zero_vec.c\
 	normalize.c\
 

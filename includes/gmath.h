@@ -16,6 +16,7 @@
 # include <math.h>
 # include "libft.h"
 # define DEGREE_1 (M_PI / 180.0)
+# define FLOAT_0 1e-6f
 
 typedef struct			s_quaternion
 {
@@ -88,6 +89,13 @@ t_vec4					mat_mul_vec(t_mat4 *m, t_vec4 *v);
 t_mat4					mat_mul_mat(t_mat4 *m1, t_mat4 *m2);
 t_mat4					scale_mat(float scale);
 t_mat4					translate_mat(float x, float y, float z);
+t_mat4					mat_transpose(t_mat4 *mat);
+float					mat3_det(t_mat4 *mat);
+t_vec4					mat3_cramer_solution(
+	t_mat4 *a,
+	t_vec4 *b,
+	int *solution_found
+);
 
 /*
 ** vector
@@ -99,6 +107,7 @@ t_vec4					vec_plus_vec(t_vec4 *v1, t_vec4 *v2);
 t_vec4					vec_cross_vec(t_vec4 *v1, t_vec4 *v2);
 float					vec_norm(t_vec4 *v);
 t_vec4					normalize(t_vec4 *v);
+t_vec4					vec_sub_vec(t_vec4 *v1, t_vec4 *v2);
 
 /*
 ** complex
@@ -126,6 +135,9 @@ t_polygon_coefficient	polygon_coefficient(t_polygon *polygon);
 /*
 ** camera
 */
+t_vec4					camera_z_axis(t_camera *cam);
+t_vec4					camera_x_axis(t_vec4 *z_w, t_vec4 *z_c, float roll);
+t_vec4					camera_y_axis(t_vec4 *z, t_vec4 *x);
 t_mat4					camera_mat(t_camera *cam);
 void					rotate_camera(t_camera *cam, t_vec4 *axis,\
 	t_vec4 *axis_foot, float theta);
