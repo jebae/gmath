@@ -15,8 +15,10 @@
 
 # include <math.h>
 # include "libft.h"
-# define DEGREE_1 (M_PI / 180.0)
-# define FLOAT_0 1e-6f
+# define GMATH_TRUE			1
+# define GMATH_FALSE		0
+# define DEGREE_1			(M_PI / 180.0)
+# define FLOAT_0			1e-6f
 
 typedef struct			s_quaternion
 {

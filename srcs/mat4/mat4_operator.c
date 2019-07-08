@@ -90,7 +90,7 @@ float		mat3_det(t_mat4 *mat)
 		(mat->arr[0][1] * mat->arr[2][2] - mat->arr[0][2] * mat->arr[2][1]) +\
 		mat->arr[2][0] *\
 		(mat->arr[0][1] * mat->arr[1][2] - mat->arr[0][2] * mat->arr[1][1]));
-	if (res < FLOAT_0)
+	if (ABS(res) < FLOAT_0)
 		return (0.0f);
 	return (res);
 }
@@ -105,7 +105,7 @@ t_vec4		mat3_cramer_solution(t_mat4 *a, t_vec4 *b, int *solution_found)
 
 	det = mat3_det(a);
 	if (det == 0.0f)
-		*solution_found = 0;
+		*solution_found = GMATH_FALSE;
 	i = 0;
 	while (i < 3)
 	{
@@ -119,6 +119,6 @@ t_vec4		mat3_cramer_solution(t_mat4 *a, t_vec4 *b, int *solution_found)
 		x.arr[i] = mat3_det(&mat) / det;
 		i++;
 	}
-	*solution_found = 1;
+	*solution_found = GMATH_TRUE;
 	return (x);
 }
