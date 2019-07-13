@@ -70,5 +70,5 @@ t_vec4		vec_cross_vec(t_vec4 *v1, t_vec4 *v2)
 
 float		vec_norm(t_vec4 *v)
 {
-	return (sqrt(pow(v->arr[0], 2) + pow(v->arr[1], 2) + pow(v->arr[2], 2)));
+	return (sqrtf(pow(v->arr[0], 2) + pow(v->arr[1], 2) + pow(v->arr[2], 2)));
 }
