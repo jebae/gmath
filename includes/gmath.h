@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:24:42 by jebae             #+#    #+#             */
-/*   Updated: 2019/06/17 13:50:57 by jebae            ###   ########.fr       */
+/*   Updated: 2019/07/29 14:45:49 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,19 +140,29 @@ t_polygon_coefficient	polygon_coefficient(t_polygon *polygon);
 t_vec4					camera_z_axis(t_camera *cam);
 t_vec4					camera_x_axis(t_vec4 *z_w, t_vec4 *z_c, float roll);
 t_vec4					camera_y_axis(t_vec4 *z, t_vec4 *x);
+t_mat4					camera_basis_mat(t_camera *cam);
 t_mat4					world_to_cam_coord_mat(t_camera *cam);
-t_mat4					cam_to_world_coord_mat(t_camera *cam);
-void					rotate_camera(t_camera *cam, t_vec4 *axis,\
-	t_vec4 *axis_foot, float theta);
+void					rotate_camera(
+	t_camera *cam,
+	t_vec4 *axis,
+	t_vec4 *axis_foot,
+	float theta
+);
 
 /*
 ** projection
 */
 t_vec4					parallel_projection(t_vec4 *vertex);
-float					cal_parallel_proj_z(int x, int y,\
-	t_polygon_coefficient *co);
+float					cal_parallel_proj_z(
+	int x,
+	int y,
+	t_polygon_coefficient *co
+);
 t_vec4					perspective_projection(t_vec4 *vertex);
-float					cal_perspective_proj_z(int x, int y,\
-	t_polygon_coefficient *co);
+float					cal_perspective_proj_z(
+	int x,
+	int y,
+	t_polygon_coefficient *co
+);
 
 #endif
