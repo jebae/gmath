@@ -44,9 +44,9 @@ t_mat4		mat_mul_mat(t_mat4 *m1, t_mat4 *m2)
 	while (r1 < 4)
 	{
 		r2 = 0;
-		res.arr[r1][r2] = 0;
 		while (r2 < 4)
 		{
+			res.arr[r1][r2] = 0;
 			c = 0;
 			while (c < 4)
 			{
@@ -66,11 +66,12 @@ t_mat4		mat_transpose(t_mat4 *mat)
 	int			j;
 	t_mat4		t;
 
+	t = *mat;
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < 3)
 		{
 			t.arr[j][i] = mat->arr[i][j];
 			j++;

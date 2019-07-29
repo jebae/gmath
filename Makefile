@@ -34,7 +34,7 @@ INCLUDES = -I ./$(INCDIR)\
 
 # srcs
 SRC_CAMERA = camera_axis.c\
-	camera_mat.c\
+	camera_coord.c\
 	rotate_camera.c\
 
 SRC_COMPLEX = complex_operator.c\

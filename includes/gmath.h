@@ -140,7 +140,8 @@ t_polygon_coefficient	polygon_coefficient(t_polygon *polygon);
 t_vec4					camera_z_axis(t_camera *cam);
 t_vec4					camera_x_axis(t_vec4 *z_w, t_vec4 *z_c, float roll);
 t_vec4					camera_y_axis(t_vec4 *z, t_vec4 *x);
-t_mat4					camera_mat(t_camera *cam);
+t_mat4					world_to_cam_coord_mat(t_camera *cam);
+t_mat4					cam_to_world_coord_mat(t_camera *cam);
 void					rotate_camera(t_camera *cam, t_vec4 *axis,\
 	t_vec4 *axis_foot, float theta);
 

@@ -12,7 +12,7 @@
 
 #include "gmath.h"
 
-t_mat4			camera_mat(t_camera *cam)
+t_mat4			world_to_cam_coord_mat(t_camera *cam)
 {
 	static t_vec4		z_w = (t_vec4){{0, 0, 1, 1}};
 	t_mat4				mat;
@@ -29,9 +29,21 @@ t_mat4			camera_mat(t_camera *cam)
 	ft_memcpy((void *)(mat.arr[0]), (const void *)&x_c, sizeof(float) * 3);
 	ft_memcpy((void *)(mat.arr[1]), (const void *)&y_c, sizeof(float) * 3);
 	ft_memcpy((void *)(mat.arr[2]), (const void *)&z_c, sizeof(float) * 3);
-	mat.arr[0][3] = vec_dot_vec(&x_c, &(cam->pos)) * (-1);
-	mat.arr[1][3] = vec_dot_vec(&y_c, &(cam->pos)) * (-1);
-	mat.arr[2][3] = vec_dot_vec(&z_c, &(cam->pos)) * (-1);
+	mat.arr[0][3] = vec_dot_vec(&x_c, &(cam->pos)) * (-1.0f);
+	mat.arr[1][3] = vec_dot_vec(&y_c, &(cam->pos)) * (-1.0f);
+	mat.arr[2][3] = vec_dot_vec(&z_c, &(cam->pos)) * (-1.0f);
 	mat.arr[3][3] = 1;
+	return (mat);
+}
+
+t_mat4			cam_to_world_coord_mat(t_camera *cam)
+{
+	t_mat4		mat;
+
+	mat = world_to_cam_coord_mat(cam);
+	mat = mat_transpose(&mat);
+	mat.arr[0][3] = mat.arr[0][3] * -1.0f;
+	mat.arr[1][3] = mat.arr[1][3] * -1.0f;
+	mat.arr[2][3] = mat.arr[2][3] * -1.0f;
 	return (mat);
 }
