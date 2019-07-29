@@ -50,14 +50,14 @@ SRC_VEC = vec4_operator.c\
 	zero_vec.c\
 	normalize.c\
 
-SRC_QUATERNION = quaternion_operator.o\
-	q_rotate.o\
+SRC_QUATERNION = quaternion_operator.c\
+	q_rotate.c\
 
-SRC_PROJECTION = parallel_projection.o\
-	perspective_projection.o\
+SRC_PROJECTION = parallel_projection.c\
+	perspective_projection.c\
 
-SRC_POLYGON = polygon_coefficient.o\
-	new_polygon.o\
+SRC_POLYGON = polygon_coefficient.c\
+	new_polygon.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_CAMERA:.c=.o))
