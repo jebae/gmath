@@ -14,7 +14,7 @@
 
 t_mat4			camera_basis_mat(t_camera *cam)
 {
-	static t_vec4		z_w = (t_vec4){{0, 0, 1, 1}};
+	static t_vec4		z_w = (t_vec4){{0.0f, 0.0f, 1.0f, 1.0f}};
 	t_mat4				mat;
 	t_vec4				x_c;
 	t_vec4				y_c;
