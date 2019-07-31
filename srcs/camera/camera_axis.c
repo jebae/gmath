@@ -1,33 +1,35 @@
 #include "gmath.h"
 
-t_vec4		camera_z_axis(t_camera *cam)
+void		set_camera_z_axis(t_camera *cam, t_vec4 *focus)
 {
-	t_vec4		z;
-
-	z = vec_sub_vec(&(cam->focus), &(cam->pos));
-	z = normalize(&z);
-	return (z);
+	cam->z_axis = vec_sub_vec(focus, &(cam->pos));
+	cam->z_axis = normalize(&(cam->z_axis));
 }
 
-t_vec4		camera_x_axis(t_vec4 *z_w, t_vec4 *z_c, float roll)
+void		set_camera_x_axis(t_camera *cam)
 {
+	static t_vec4	z_w = (t_vec4){{0.0f, 0.0f, 1.0f, 1.0f}};
 	t_quaternion	q;
 	t_quaternion	q_i;
-	t_vec4			x;
 
-	x = vec_cross_vec(z_c, z_w);
-	q = rotate_q(z_c, roll);
+	if (ABS(vec_dot_vec(&(cam->z_axis), &z_w)) >= 1.0f)
+		return ;
+	cam->x_axis = vec_cross_vec(&(cam->z_axis), &z_w);
+	q = rotate_q(&(cam->z_axis), cam->roll);
 	q_i = inverse_q(&q);
-	x = rotate(&q, &x, &q_i);
-	x = normalize(&x);
-	return (x);
+	cam->x_axis = rotate(&q, &(cam->x_axis), &q_i);
+	cam->x_axis = normalize(&(cam->x_axis));
 }
 
-t_vec4		camera_y_axis(t_vec4 *z, t_vec4 *x)
+void		set_camera_y_axis(t_camera *cam)
 {
-	t_vec4		y;
+	cam->y_axis = vec_cross_vec(&(cam->z_axis), &(cam->x_axis));
+	cam->y_axis = normalize(&(cam->y_axis));
+}
 
-	y = vec_cross_vec(z, x);
-	y = normalize(&y);
-	return (y);
+void		set_camera_axis(t_camera *cam, t_vec4 *focus)
+{
+	set_camera_z_axis(cam, focus);
+	set_camera_x_axis(cam);
+	set_camera_y_axis(cam);
 }

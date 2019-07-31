@@ -69,7 +69,9 @@ typedef struct			s_polygon_coefficient
 typedef struct			s_camera
 {
 	t_vec4				pos;
-	t_vec4				focus;
+	t_vec4				x_axis;
+	t_vec4				y_axis;
+	t_vec4				z_axis;
 	float				zoom;
 	float				roll;
 }						t_camera;
@@ -137,9 +139,10 @@ t_polygon_coefficient	polygon_coefficient(t_polygon *polygon);
 /*
 ** camera
 */
-t_vec4					camera_z_axis(t_camera *cam);
-t_vec4					camera_x_axis(t_vec4 *z_w, t_vec4 *z_c, float roll);
-t_vec4					camera_y_axis(t_vec4 *z, t_vec4 *x);
+void					set_camera_z_axis(t_camera *cam, t_vec4 *focus);
+void					set_camera_y_axis(t_camera *cam);
+void					set_camera_x_axis(t_camera *cam);
+void					set_camera_axis(t_camera *cam, t_vec4 *focus);
 t_mat4					camera_basis_mat(t_camera *cam);
 t_mat4					world_to_cam_coord_mat(t_camera *cam);
 void					rotate_camera(
